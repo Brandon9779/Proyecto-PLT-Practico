@@ -1,0 +1,4 @@
+LINKS DE REFERENCIAS:
+https://martinfowler.com/dsl.html
+https://tomassetti.me/domain-specific-languages
+https://www.gamedeveloper.com/programming/the-whimsy-of-domain-specific-languages
