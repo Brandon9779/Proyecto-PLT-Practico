@@ -1,0 +1,8 @@
+LINKS DE REFERENCIAS DLS:
+https://martinfowler.com/dsl.html
+https://tomassetti.me/domain-specific-languages
+https://www.gamedeveloper.com/programming/the-whimsy-of-domain-specific-languages
+
+LINKS DEL TETRIS:
+https://www.researchgate.net/publication/335551149_Towards_Finding_Flow_in_Tetris
+https://people.csail.mit.edu/dln/papers/tetris/tetris.pdf?
