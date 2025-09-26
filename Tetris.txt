@@ -1,0 +1,168 @@
+####################
+# REGLAS DEL JUEGO #
+####################
+
+juego "Tetris" {
+
+  ## dimensiones del tablero
+  tablero {
+    filas = 20
+    columnas = 10
+    inicio_lleno = false
+    fondo = "negro"
+  }
+
+  ## definicion de las piezas
+  # tipos de piezas (I,O,T,L,J,S,Z)
+  # colores de las piezas ("amarillo","azul","rojo","verde","morado")
+  # rotacion de las piezas (0, 90, 180, 270)
+
+  piezas {
+
+    pieza_inicial = random([I, O, T, L, J, S, Z])   # La primera pieza de la partida
+    pieza_siguiente = random([I, O, T, L, J, S, Z]) # La pieza despues de otra
+
+    I {                                                          # Linea
+      color = random(["amarillo","azul","rojo","verde","morado"])
+      rotaciones = [ 
+        # rotacion 90 a 270 (vertical)
+        [[0,1,0,0],[0,1,0,0],[0,1,0,0],[0,1,0,0]],
+        # rotacion 0 a 180 (horizontal)
+        [[0,0,0,0],[1,1,1,1],[0,0,0,0],[0,0,0,0]]
+      ]
+    }
+
+    O {                                                          # Cuadrado
+      color = random(["amarillo","azul","rojo","verde","morado"])
+      rotaciones = [
+        # No tiene rotacion
+        [[1,1],[1,1]]
+      ]
+    }
+
+    T {                                                          # T
+      color = random(["amarillo","azul","rojo","verde","morado"])
+      rotaciones = [
+        # rotacion 0
+        [[0,1,0],[1,1,1],[0,0,0]],
+        # rotacion 90
+        [[0,1,0],[0,1,1],[0,1,0]],
+        # rotacion 180
+        [[0,0,0],[1,1,1],[0,1,0]],
+        # rotacion 270
+        [[0,1,0],[1,1,0],[0,1,0]]
+      ]
+    }
+
+    L {                                                          # L
+      color = random(["amarillo","azul","rojo","verde","morado"])
+      rotaciones = [
+        # rotacion 0
+        [[0,0,1],[1,1,1],[0,0,0]],
+        # rotacion 90
+        [[0,1,0],[0,1,0],[0,1,1]],
+        # rotacion 180
+        [[0,0,0],[1,1,1],[1,0,0]],
+        # rotacion 270
+        [[1,1,0],[0,1,0],[0,1,0]]
+      ]
+    }
+
+    J {                                                          # J
+      color = random(["amarillo","azul","rojo","verde","morado"])
+      rotaciones = [
+        # rotacion 0
+        [[1,0,0],[1,1,1],[0,0,0]],
+        # rotacion 90
+        [[0,1,1],[0,1,0],[0,1,0]],
+        # rotacion 180
+        [[0,0,0],[1,1,1],[0,0,1]],
+        # rotacion 270
+        [[0,1,0],[0,1,0],[1,1,0]]
+      ]
+    }
+
+    S {                                                          # S
+      color = random(["amarillo","azul","rojo","verde","morado"])
+      rotaciones = [
+        # rotacion 0
+        [[0,1,1],[1,1,0],[0,0,0]],
+        # rotacion 90
+        [[0,1,0],[0,1,1],[0,0,1]],
+        # rotacion 180
+        [[0,0,0],[0,1,1],[1,1,0]],
+        # rotacion 270
+        [[1,0,0],[1,1,0],[0,1,0]]
+      ]
+    }
+
+    Z {                                                          # Z
+      color = random(["amarillo","azul","rojo","verde","morado"])
+      rotaciones = [
+        # rotacion 0
+        [[1,1,0],[0,1,1],[0,0,0]],
+        # rotacion 90
+        [[0,0,1],[0,1,1],[0,1,0]],
+        # rotacion 180
+        [[0,0,0],[1,1,0],[0,1,1]],
+        # rotacion 270
+        [[0,1,0],[1,1,0],[1,0,0]]
+      ]
+    }
+  }
+
+  ## Condiones del juego
+  # cuando has perdido
+  perdiste {
+    condicion = "piezas_alcanzan_cima"
+  }
+
+  # cuando se elimina una o varias filas
+  eliminacion_filas {
+    fila_completa = true
+  }
+
+  # movimiento de las piezas
+  movimientos_permitidos = ["izquierda", "derecha", "caida", "rotacion"]
+
+  ## Puntacion
+  puntos {
+    puntos_iniciales = 0
+    ganar_puntos {
+      completar_filas {
+        1_fila = 250
+        2_filas = 500
+        3_filas = 800
+        4_filas = 1100
+      }
+      eliminar_fila = true	
+    }
+  }
+
+  # velocidades de las piezas (medidas en milisegundos)
+  velocidad {
+    velocidad_inicial = 1000
+    velocidad_progresiva {
+      aumentar_velocidad = true
+      cada_puntos = 1000   # aumento cada 1000 puntos
+      cantidad_aumento = 0.9
+    }
+  }
+
+  ## Controles del juegos
+  # teclas que haran las acciones 
+  controles {
+    # movimientos laterales
+    izquierda = "a"
+    derecha   = "d"
+
+    # movimiento descendente 
+    caida     = "s"
+
+    # movimiento rotacional
+    rotar     = "w"
+
+    # interacciones con el juego
+    pausar    = "p"
+  }
+}
