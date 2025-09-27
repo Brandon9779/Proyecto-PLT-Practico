@@ -140,11 +140,15 @@ juego "Tetris" {
   }
 
   # velocidades de las piezas (medidas en milisegundos)
-  velocidad {
+  velocidad_caida {
     velocidad_inicial = 1000
     velocidad_progresiva {
       aumentar_velocidad = true
       cada_puntos = 1000   # aumento cada 1000 puntos
+      cantidad_aumento = 0.9
+    }
+    velocidad_controlada {
+      movimiento_caida = True
       cantidad_aumento = 0.9
     }
   }
@@ -166,3 +170,4 @@ juego "Tetris" {
     pausar    = "p"
   }
 }
+
