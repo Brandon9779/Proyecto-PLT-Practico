@@ -1,0 +1,116 @@
+####################
+# REGLAS DEL JUEGO #
+####################
+
+game snake {
+
+  title   = "Snake clásico extendido";
+  author  = "Equipo XYZ";
+  version = "1.0";
+
+  ## dimensiones del tablero
+  tablero {
+    filas        = 20;
+    columnas     = 30;
+    fondo        = "negro";
+    celda_px     = 16;
+    inicio_lleno = false;
+    bordes_solidos = true;
+  }
+
+  ## definicion de la serpiente
+  serpiente {
+    velocidad_cps       = 8;
+    largo_inicial       = 3;
+    crecimiento_por_comida = 1;
+    color               = "verde";
+    posicion_inicial    = { x: 15, y: 10 };
+    direccion_inicial   = "derecha";
+  }
+
+  ## comida
+  comida {
+    max_activa = 2;
+    items = [
+      { tipo: "basica", valor_puntos: 10, color: "rojo" },
+      { tipo: "bonus",  valor_puntos: 25, color: "amarillo" }
+    ];
+    respawn_ms = 1500;
+    evitar_sobre_serpiente = true;
+    evitar_paredes = true;
+  }
+
+  ## paredes/obstaculos
+  paredes {
+    usar_paredes = true;
+    lista = [
+      { x: 5, y: 5 },
+      { x: 6, y: 5 },
+      { x: 7, y: 5 }
+    ];
+  }
+
+  ## condiciones de derrota
+  perdiste {
+    colision_pared   = true;
+    colision_cuerpo  = true;
+    salir_tablero    = true;
+  }
+
+  ## reglas globales
+  reglas {
+    wrap_edges = false;
+    tick_ms    = 100;
+  }
+
+  ## movimientos permitidos
+  movimientos_permitidos = ["arriba","abajo","izquierda","derecha"];
+
+  ## puntuación
+  puntos {
+    puntos_iniciales = 0;
+    ganar_puntos = {
+      comer_basica: 10,
+      comer_bonus: 25,
+      bonus_longitud_activo: true,
+      bonus_longitud_cada_segmentos: 5,
+      bonus_longitud_valor: 20
+    };
+    perder_puntos = {
+      colision_cuerpo: 0,
+      colision_pared:  0
+    };
+  }
+
+  ## velocidad y progresión
+  velocidad {
+    velocidad_inicial_cps = 8;
+    velocidad_progresiva = {
+      aumentar_velocidad: true,
+      cada_puntos: 100,
+      factor_aumento: 1.05,
+      limite_cps: 20
+    };
+  }
+
+  ## controles del juego
+  controles {
+    arriba    = "w";
+    abajo     = "s";
+    izquierda = "a";
+    derecha   = "d";
+    pausar    = "p";
+  }
+
+  ## estética / assets
+  assets {
+    charset  = "ascii";
+    simbolos = {
+      serpiente: "O",
+      cabeza:   "@",
+      comida:   "*",
+      pared:    "#",
+      fondo:    " "
+    };
+  }
+}
