@@ -131,9 +131,9 @@ juego "Tetris" {
     ganar_puntos {
       completar_filas {
         1_fila = 250
-        2_filas = 500
-        3_filas = 800
-        4_filas = 1100
+        2_fila = 500
+        3_fila = 800
+        4_fila = 1100
       }
       eliminar_fila = true	
     }
@@ -170,4 +170,5 @@ juego "Tetris" {
     pausar    = "p"
   }
 }
+
 
